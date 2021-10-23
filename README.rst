@@ -9,7 +9,7 @@ Installation
 
 ::
 
-    pip install -U git+https:///github.com/miclegr/sbp-sr
+    pip install -U git+https://github.com/miclegr/sbp-sr
     
 Requirements are Numpy, Scikit-Learn and Numba
     
