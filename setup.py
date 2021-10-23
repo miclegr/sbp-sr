@@ -18,6 +18,6 @@ setup(name=NAME,
       maintainer_email=MAINTAINER_EMAIL,
       url=URL,
       download_url=DOWNLOAD_URL,
-      install_requires=['numpy>=1.18', 'scipy>=1.4.1'],
+      install_requires=['numpy>=1.18', 'scipy>=1.4.1', 'numba>0.48.0'],
       packages=find_packages(),
       )
