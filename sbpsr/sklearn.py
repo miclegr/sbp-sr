@@ -26,7 +26,8 @@ class Lasso(Lasso_sklearn):
         The maximum number of iterations of L-BFGS-B optimizer
 
     max_fun : int
-        The maximum number of objective function call made by L-BFGS-B optimizer
+        The maximum number of objective function call
+        made by L-BFGS-B optimizer
 
     ftol : float, optional
         Tolerance parameter passed to internal call to L-BFGS-B optimizer
@@ -51,7 +52,7 @@ class Lasso(Lasso_sklearn):
 
     """
 
-    def __init__(self, alpha=1., fit_intercept=True, 
+    def __init__(self, alpha=1., fit_intercept=True,
                  warm_start=False, max_iter=1000,
                  gtol=1e-5, ftol=2e-9, max_fun=10000
                  ):
@@ -64,17 +65,18 @@ class Lasso(Lasso_sklearn):
         self.max_fun = max_fun
 
     def path(self, X, y, alphas, coef_init=None, **kwargs):
-        """Compute Lasso path""" 
+        """Compute Lasso path"""
 
         if alphas is not None:
             lambdas = [1/(alpha * 2) for alpha in alphas]
         else:
             lambdas = None
 
-        lambdas, coeffs, dual_gaps, etc = opti_path(X, y, lambdas=lambdas, max_iter=self.max_iter,
-                            gtol=self.gtol, ftol=self.ftol, maxfun= self.max_fun,
-                            return_n_iter=False)
-                
+        lambdas, coeffs, dual_gaps, etc = opti_path(
+                X, y, lambdas=lambdas, max_iter=self.max_iter,
+                gtol=self.gtol, ftol=self.ftol, maxfun=self.max_fun,
+                return_n_iter=False)
+
         return lambdas, coeffs, dual_gaps, etc
 
 
@@ -123,7 +125,8 @@ class LassoCV(RegressorMixin, LinearModelCV):
         The maximum number of iterations of L-BFGS-B optimizer
 
     max_fun : int
-        The maximum number of objective function call made by L-BFGS-B optimizer
+        The maximum number of objective function call
+        made by L-BFGS-B optimizer
 
     ftol : float, optional
         Tolerance parameter passed to internal call to L-BFGS-B optimizer
@@ -182,16 +185,13 @@ class LassoCV(RegressorMixin, LinearModelCV):
         lambdas, coefs, dual_gaps, _ = opti_path(
                 X, y, lambdas=lambdas,
                 n_lambdas=self.n_alphas, max_iter=self.max_iter,
-                gtol=self.gtol, ftol=self.ftol, maxfun= self.max_fun,
+                gtol=self.gtol, ftol=self.ftol, maxfun=self.max_fun,
                 return_n_iter=False)
-        #alphas = lambdas/(2 * X.shape[0])
 
         return np.ones_like(alphas[::-1]), coefs, dual_gaps
-
 
     def _get_estimator(self):
         return Lasso()
 
     def _is_multitask(self):
         return False
-
