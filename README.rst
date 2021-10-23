@@ -11,6 +11,8 @@ Installation
 
     pip install -U git+https:///github.com/miclegr/sbp-sr
     
+Requirements are Numpy, Scikit-Learn and Numba
+    
 Examples
 *********
 
@@ -23,6 +25,7 @@ Examples
     X, y = sklearn.datasets.make_regression(n,p)
 
     model = sbpsr.Lasso(alpha=1e-3).fit(X,y)
+    cv = sbpsr.LassoCV().fit(X,y)
     
 Paper
 *****
